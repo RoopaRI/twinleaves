@@ -39,7 +39,7 @@ export default function Home() {
     const handleSearch = async (term) => {
       setSearchTerm(term);
       setPage(1); // Reset page to 1 when search term changes
-        console.log(term)
+
       setLoading(true);
       try {
         const response = await axios.get('https://catalog-management-system-dev-ak3ogf6zea-uc.a.run.app/cms/products', {

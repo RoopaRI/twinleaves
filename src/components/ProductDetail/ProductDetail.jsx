@@ -4,15 +4,18 @@ import { useParams } from 'react-router-dom';
 import { CircularProgress, Container, Typography, Card, CardContent, CardMedia } from '@mui/material';
 
 const ProductDetails = () => {
-  const { id } = useParams();
+  const { index } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchProduct = async (id) => {
+  const fetchProduct = async (index) => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://catalog-management-system-dev-ak3ogf6zea-uc.a.run.app/cms/products?page=${id}`);
-      setProduct(response.data);
+      const response = await axios.get(`https://catalog-management-system-dev-ak3ogf6zea-uc.a.run.app/cms/products`, {
+        params: { page: 1, pageSize: 10 }
+      });
+      const productData = response.data.products[index];
+      setProduct(productData);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching product:', error);
@@ -21,8 +24,8 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    fetchProduct(id);
-  }, [id]);
+    fetchProduct(index);
+  }, [index]);
 
   if (loading) {
     return <CircularProgress />;
@@ -36,7 +39,7 @@ const ProductDetails = () => {
             component="img"
             alt={product.name}
             height="300"
-            image={product.images.front || 'https://pluspng.com/img-png/onion-png-onion-png-image-788.png'}
+            image={product.images.front}
           />
           <CardContent>
             <Typography variant="h5" component="div">
