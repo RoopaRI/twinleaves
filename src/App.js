@@ -1,12 +1,23 @@
-import React from "react";
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import ProductList from './components/ProductList_DataGrid/ProductList';
+import ProductList from './components/ProductList/ProductList';
+import ProductDetails from './components/ProductDetail/ProductDetail';
+import Home from './components/Home/Home';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>Twinleaves</h1>
-    </div>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/" element={<ProductList />} />
+    //     <Route path="/products/page=id" element={<ProductDetails />} />
+    //   </Routes>
+    // </Router>
+
+    <Home />
+    
+    
   );
-}
+};
 
 export default App;
